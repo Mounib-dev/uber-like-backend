@@ -17,7 +17,7 @@ app.use(express.json());
 
 app.use("/", api);
 
-const port = process.env.PORT || 3030;
+const port = process.env.PORT || 3040;
 
 app.listen(port, () => {
   console.log(`[server]:🗄️  Server is running at http://localhost:${port}`);
