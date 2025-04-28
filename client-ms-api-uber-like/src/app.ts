@@ -17,10 +17,12 @@ app.use(express.json());
 
 app.use("/", api);
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3010;
 
 app.listen(port, () => {
-  console.log(`[server]:🗄️  Server is running at http://localhost:${port}`);
+  console.log(
+    `[server]:🗄️  Client Microservice Server is running at http://localhost:${port}`
+  );
 });
 
 export default app;
