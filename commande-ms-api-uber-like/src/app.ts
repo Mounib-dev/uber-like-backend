@@ -6,7 +6,8 @@ import morgan from "morgan";
 import helmet from "helmet";
 import cors from "cors";
 
-import api from "./routes";
+import api from "./routes/commande.route";
+import commandeRoutes from "./routes/commande.route";
 import { AppDataSource } from "./data-source";
 
 const app = express();
@@ -26,6 +27,7 @@ AppDataSource.initialize()
   });
 
 app.use("/", api);
+app.use("/api/v1/commande", commandeRoutes);
 
 const port = process.env.PORT || 3020;
 

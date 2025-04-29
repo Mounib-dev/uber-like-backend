@@ -1,0 +1,49 @@
+import {
+    Entity,
+    PrimaryGeneratedColumn,
+    Column,
+  } from "typeorm";
+  
+  export enum Status {
+    EN_ATTENTE = "en attente",
+    EN_PREPARATION = "en préparation",
+    PRET = "prêt",
+    LIVRE = "livré",
+  }
+  
+  @Entity()
+  export class Commande {
+    @PrimaryGeneratedColumn()
+    id!: number;
+  
+    // Référence au client par ID uniquement
+    @Column()
+    clientId!: number;
+  
+    // Liste des plats commandés sous forme de JSON
+    @Column("json")
+    plats!: {
+      id: number;
+      name: string;
+      quantité: number;
+      price: number;
+    }[];
+  
+    @Column({
+      type: "enum",
+      enum: Status,
+      default: Status.EN_ATTENTE,
+    })
+    status!: Status;
+  
+    constructor(
+      clientId: number,
+      plats: { id: number; name: string; quantité: number; price: number }[],
+      status: Status = Status.EN_ATTENTE
+    ) {
+      this.clientId = clientId;
+      this.plats = plats;
+      this.status = status;
+    }
+  }
+  
