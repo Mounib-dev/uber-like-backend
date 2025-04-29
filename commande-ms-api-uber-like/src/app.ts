@@ -7,6 +7,7 @@ import helmet from "helmet";
 import cors from "cors";
 
 import api from "./routes";
+import { AppDataSource } from "./data-source";
 
 const app = express();
 
@@ -14,6 +15,15 @@ app.use(morgan("dev"));
 app.use(helmet());
 app.use(cors());
 app.use(express.json());
+
+AppDataSource.initialize()
+  .then(() => {
+    console.log("🛢️  Connected To Database Commande");
+  })
+  .catch((err) => {
+    console.error(err);
+    console.log("⚠️ Error to connect Database Commande");
+  });
 
 app.use("/", api);
 
