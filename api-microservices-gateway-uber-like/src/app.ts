@@ -7,6 +7,7 @@ import helmet from "helmet";
 import cors from "cors";
 
 import api from "./routes";
+import userServiceRoutes from "./routes/ClientService.route";
 
 const app = express();
 
@@ -16,6 +17,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/", api);
+app.use("/gateway/client-service", userServiceRoutes);
 
 const port = process.env.PORT || 3000;
 
