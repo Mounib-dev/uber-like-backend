@@ -1,4 +1,3 @@
-// src/routes/cuisine.route.ts
 import { Router } from "express";
 import { getCommandesCuisine, updateStatutCommande } from "../api/api.cuisine";
 
