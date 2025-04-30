@@ -15,32 +15,36 @@ export const createCommande = async (
     );
 
     if (response.status === 201) {
-      // Save within Client Service
-      const responseFromClientService = await axios.post(
-        `http://localhost:3010/api/v1/commande/save`,
-        response.data.commande,
-        {
-          headers: { "Content-Type": "application/json" },
-        }
-      );
+      try {
+        // Save within Client Service
+        const responseFromClientService = await axios.post(
+          `http://localhost:3010/api/v1/commande/save`,
+          response.data.commande,
+          {
+            headers: { "Content-Type": "application/json" },
+          }
+        );
 
-      // Save within Cuisine Service
-      const responseFromCuisineService = await axios.post(
-        `http://localhost:3030/api/v1/commande/save`,
-        response.data.commande,
-        {
-          headers: { "Content-Type": "application/json" },
-        }
-      );
+        // Save within Cuisine Service
+        const responseFromCuisineService = await axios.post(
+          `http://localhost:3030/api/v1/commande/save`,
+          response.data.commande,
+          {
+            headers: { "Content-Type": "application/json" },
+          }
+        );
 
-      // Save within Livraison Service
-      const responseFromLivraisonService = await axios.post(
-        `http://localhost:3040/api/v1/commande/save`,
-        response.data.commande,
-        {
-          headers: { "Content-Type": "application/json" },
-        }
-      );
+        // Save within Livraison Service
+        const responseFromLivraisonService = await axios.post(
+          `http://localhost:3040/api/v1/commande/save`,
+          response.data.commande,
+          {
+            headers: { "Content-Type": "application/json" },
+          }
+        );
+      } catch (err) {
+        console.error(err);
+      }
     }
 
     return res.status(response.status).json(response.data);
