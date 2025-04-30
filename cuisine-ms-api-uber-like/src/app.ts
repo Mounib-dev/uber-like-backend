@@ -10,6 +10,9 @@ import api from "./routes";
 
 import commandeRoutes from "./routes/commande.route";
 import cuisineRoutes from "./routes/cuisine.route";
+
+import userRoutes from "./routes/user.route";
+
 import { AppDataSource } from "./data-source";
 
 const app = express();
@@ -32,6 +35,7 @@ app.use("/", api);
 
 app.use("/api/v1/commande", commandeRoutes);
 app.use("/api/v1/cuisine", cuisineRoutes);
+app.use("/api/v1/user", userRoutes);
 
 const port = process.env.PORT || 3030;
 
