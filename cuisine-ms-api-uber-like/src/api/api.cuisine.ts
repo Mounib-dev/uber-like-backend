@@ -1,8 +1,12 @@
-import { Request, Response } from "express";
+import { Request, Response, NextFunction } from "express";
 import { AppDataSource } from "../data-source";
 import { Commande, Status } from "../entity/Commande";
 
-export const getCommandesCuisine = async (_: Request, res: Response) => {
+export const getCommandesCuisine = async (
+  _: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
   const commandeRepo = AppDataSource.getRepository(Commande);
 
   try {
@@ -13,13 +17,17 @@ export const getCommandesCuisine = async (_: Request, res: Response) => {
       ],
     });
 
-    return res.status(200).json(commandes);
+    res.status(200).json(commandes);
   } catch (error) {
-    return res.status(500).json({ message: "Erreur récupération commandes" });
+    next(error); 
   }
 };
 
-export const updateStatutCommande = async (req: Request, res: Response) => {
+export const updateStatutCommande = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
   const { id } = req.params;
   const { statut } = req.body;
 
@@ -29,14 +37,15 @@ export const updateStatutCommande = async (req: Request, res: Response) => {
     const commande = await commandeRepo.findOneBy({ id: parseInt(id) });
 
     if (!commande) {
-      return res.status(404).json({ message: "Commande introuvable" });
+      res.status(404).json({ message: "Commande introuvable" });
+      return;
     }
 
     commande.status = statut;
     await commandeRepo.save(commande);
 
-    return res.status(200).json({ message: "Statut mis à jour", commande });
+    res.status(200).json({ message: "Statut mis à jour", commande });
   } catch (error) {
-    return res.status(500).json({ message: "Erreur mise à jour du statut" });
+    next(error);
   }
 };

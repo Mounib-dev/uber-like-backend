@@ -10,6 +10,9 @@ import api from "./routes";
 import userServiceRoutes from "./routes/ClientService.route";
 import commandeServiceRoutes from "./routes/CommandeService.route";
 import livraisonServiceRoutes from "./routes/LivraisonService.route";
+import cuisineGatewayRoutes from "./routes/CuisineService.route";
+
+
 
 
 const app = express();
@@ -23,6 +26,7 @@ app.use("/", api);
 app.use("/gateway/client-service", userServiceRoutes);
 app.use("/gateway/commande-service", commandeServiceRoutes);
 app.use("/gateway/livraison-service", livraisonServiceRoutes);
+app.use("/api/v1/cuisine", cuisineGatewayRoutes);
 
 const port = process.env.PORT || 3000;
 
