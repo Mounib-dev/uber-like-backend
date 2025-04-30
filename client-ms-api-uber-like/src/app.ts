@@ -14,6 +14,8 @@ import loginRoute from "./routes/auth/login.route";
 import registerRoutes from "./routes/auth/register.route";
 import userRoute from "./routes/auth/profile.route";
 
+import commandeRoutes from "./routes/commande.route";
+
 const app = express();
 
 app.use(morgan("dev"));
@@ -33,6 +35,8 @@ AppDataSource.initialize()
 app.use("/", api);
 app.use("/api/v1/auth", loginRoute);
 app.use("/api/v1/user", registerRoutes, userRoute);
+
+app.use("/api/v1/commande", commandeRoutes);
 
 const port = process.env.PORT || 3010;
 
