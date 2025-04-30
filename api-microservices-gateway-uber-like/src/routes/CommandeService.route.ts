@@ -3,16 +3,17 @@ import {
   createCommande,
   retrieveCommande
   //deleteCommande,
- 
+
   //updateCommande,
-} from "../api/api.commande";
+} from '../services/Commande/CommandeService';
+import authorizeUser from "../middlewares/authorize";
 
 
 const router = Router();
 
-router.post("/create", createCommande);
+router.post("/create",authorizeUser, createCommande);
 
-router.get("/list", retrieveCommande);
+router.get("/list", authorizeUser, retrieveCommande);
 
 //router.put("/:id", updateCommande);
 

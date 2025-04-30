@@ -5,6 +5,7 @@ import express, { RequestHandler } from "express";
 import morgan from "morgan";
 import helmet from "helmet";
 import cors from "cors";
+import livraisonRoutes from "./routes/livraison.route";
 
 import api from "./routes";
 
@@ -16,6 +17,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/", api);
+app.use("/api/v1/livraison", livraisonRoutes);
 
 const port = process.env.PORT || 3040;
 

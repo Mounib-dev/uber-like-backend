@@ -28,18 +28,18 @@ export const createCommande = async (req: Request, res: Response) :Promise<any>=
   }
 };
 
-// export const retrieveCommandes: RequestHandler = async (_req, res) => {
-//   const commandeRepository = AppDataSource.getRepository(Commande);
-//   try {
-//     const commandes = await commandeRepository.find();
-//     return res.status(200).json({ commandes });
-//   } catch (err: any) {
-//     console.error(err);
-//     return res.status(500).json({
-//       message: "Erreur lors de la récupération des commandes",
-//     });
-//   }
-// };
+export const retrieveCommande = async (req: Request, res: Response) :Promise<any>=> {
+  const commandeRepository = AppDataSource.getRepository(Commande);
+  try {
+    const commandes = await commandeRepository.find();
+    return res.status(200).json({ commandes });
+  } catch (err: any) {
+    console.error(err);
+    return res.status(500).json({
+      message: "Erreur lors de la récupération des commandes",
+    });
+  }
+};
 
 // export const updateCommandeStatus: RequestHandler<{ id: string }> = async (
 //   req,
