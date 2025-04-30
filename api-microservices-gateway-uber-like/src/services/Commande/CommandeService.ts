@@ -18,7 +18,7 @@ export const createCommande = async (
       // Save within Client Service
       const responseFromClientService = await axios.post(
         `http://localhost:3010/api/v1/commande/save`,
-        req.body,
+        response.data.commande,
         {
           headers: { "Content-Type": "application/json" },
         }
@@ -27,7 +27,7 @@ export const createCommande = async (
       // Save within Cuisine Service
       const responseFromCuisineService = await axios.post(
         `http://localhost:3030/api/v1/commande/save`,
-        req.body,
+        response.data.commande,
         {
           headers: { "Content-Type": "application/json" },
         }
@@ -36,7 +36,7 @@ export const createCommande = async (
       // Save within Livraison Service
       const responseFromLivraisonService = await axios.post(
         `http://localhost:3040/api/v1/commande/save`,
-        req.body,
+        response.data.commande,
         {
           headers: { "Content-Type": "application/json" },
         }

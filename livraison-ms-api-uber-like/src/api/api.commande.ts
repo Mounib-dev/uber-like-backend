@@ -7,10 +7,11 @@ export const saveCommande = async (
   req: Request,
   res: Response
 ): Promise<any> => {
-  const { clientId, plats } = req.body;
+  const { id, clientId, plats } = req.body;
   const commandeRepository = AppDataSource.getRepository(Commande);
 
   const newCommande = commandeRepository.create({
+    id,
     clientId,
     plats,
     status: Status.EN_ATTENTE,
