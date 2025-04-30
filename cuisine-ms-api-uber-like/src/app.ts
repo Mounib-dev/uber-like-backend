@@ -9,6 +9,9 @@ import cors from "cors";
 import api from "./routes";
 
 import commandeRoutes from "./routes/commande.route";
+
+import userRoutes from "./routes/user.route";
+
 import { AppDataSource } from "./data-source";
 
 const app = express();
@@ -30,6 +33,7 @@ AppDataSource.initialize()
 app.use("/", api);
 
 app.use("/api/v1/commande", commandeRoutes);
+app.use("/api/v1/user", userRoutes);
 
 const port = process.env.PORT || 3030;
 
