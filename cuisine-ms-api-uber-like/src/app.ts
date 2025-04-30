@@ -9,6 +9,7 @@ import cors from "cors";
 import api from "./routes";
 
 import commandeRoutes from "./routes/commande.route";
+import cuisineRoutes from "./routes/cuisine.route";
 import { AppDataSource } from "./data-source";
 
 const app = express();
@@ -30,6 +31,7 @@ AppDataSource.initialize()
 app.use("/", api);
 
 app.use("/api/v1/commande", commandeRoutes);
+app.use("/api/v1/cuisine", cuisineRoutes);
 
 const port = process.env.PORT || 3030;
 
