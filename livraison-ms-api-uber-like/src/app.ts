@@ -7,7 +7,10 @@ import helmet from "helmet";
 import cors from "cors";
 import livraisonRoutes from "./routes/livraison.route";
 
+import commandeRoutes from "./routes/commande.route";
+
 import api from "./routes";
+import { AppDataSource } from "./data-source";
 
 const app = express();
 
@@ -16,8 +19,18 @@ app.use(helmet());
 app.use(cors());
 app.use(express.json());
 
+AppDataSource.initialize()
+  .then(() => {
+    console.log("🛢️  Connected To Database Livraison");
+  })
+  .catch((err) => {
+    console.error(err);
+    console.log("⚠️ Error to connect Database Livraison");
+  });
+
 app.use("/", api);
 app.use("/api/v1/livraison", livraisonRoutes);
+app.use("/api/v1/commande", commandeRoutes);
 
 const port = process.env.PORT || 3040;
 
