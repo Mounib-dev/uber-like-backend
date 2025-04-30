@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Entity, Column, PrimaryColumn } from "typeorm";
 
 export enum Status {
   EN_ATTENTE = "en attente",
@@ -9,7 +9,7 @@ export enum Status {
 
 @Entity()
 export class Commande {
-  @PrimaryGeneratedColumn()
+  @PrimaryColumn()
   id!: number;
 
   @Column()
