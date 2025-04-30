@@ -18,9 +18,9 @@ export class Commande {
   @Column("json")
   plats!: {
     id: number;
-    name: string;
-    quantité: number;
-    price: number;
+    nom: string;
+    quantite: number;
+    prix: number;
   }[];
 
   @Column({
@@ -32,7 +32,7 @@ export class Commande {
 
   constructor(
     clientId: number,
-    plats: { id: number; name: string; quantité: number; price: number }[],
+    plats: { id: number; nom: string; quantite: number; prix: number }[],
     status: Status = Status.EN_ATTENTE
   ) {
     this.clientId = clientId;

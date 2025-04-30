@@ -6,6 +6,11 @@ import { Request, Response } from "express";
 
 export const createCommande = async (req: Request, res: Response) :Promise<any>=> {
   const { clientId, plats } = req.body;
+  console.log(clientId)
+  console.log(plats)
+  console.log(req.body)
+  console.log(req.body.clientId)
+  console.log(req.body.plats)
   const commandeRepository = AppDataSource.getRepository(Commande);
 
   const newCommande = commandeRepository.create({
