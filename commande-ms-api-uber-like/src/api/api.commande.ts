@@ -5,7 +5,7 @@ import { AppDataSource } from "./../data-source";
 import { Request, Response } from "express";
 
 export const createCommande = async (req: Request, res: Response) :Promise<any>=> {
-  const { clientId, plats } = req.body;
+  const { clientId, plats,date } = req.body;
   console.log(clientId)
   console.log(plats)
   console.log(req.body)
@@ -15,6 +15,7 @@ export const createCommande = async (req: Request, res: Response) :Promise<any>=
 
   const newCommande = commandeRepository.create({
     clientId,
+    date,
     plats,
     status: Status.EN_ATTENTE,
   });
