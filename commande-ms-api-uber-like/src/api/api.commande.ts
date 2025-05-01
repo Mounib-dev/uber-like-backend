@@ -4,13 +4,16 @@ import { AppDataSource } from "./../data-source";
 
 import { Request, Response } from "express";
 
-export const createCommande = async (req: Request, res: Response) :Promise<any>=> {
-  const { clientId, plats,date } = req.body;
-  console.log(clientId)
-  console.log(plats)
-  console.log(req.body)
-  console.log(req.body.clientId)
-  console.log(req.body.plats)
+export const createCommande = async (
+  req: Request,
+  res: Response
+): Promise<any> => {
+  const { clientId, plats, date } = req.body;
+  console.log(clientId);
+  console.log(plats);
+  console.log(req.body);
+  console.log(req.body.clientId);
+  console.log(req.body.plats);
   const commandeRepository = AppDataSource.getRepository(Commande);
 
   const newCommande = commandeRepository.create({
@@ -34,7 +37,10 @@ export const createCommande = async (req: Request, res: Response) :Promise<any>=
   }
 };
 
-export const retrieveCommande = async (req: Request, res: Response) :Promise<any>=> {
+export const retrieveCommande = async (
+  req: Request,
+  res: Response
+): Promise<any> => {
   const commandeRepository = AppDataSource.getRepository(Commande);
   try {
     const commandes = await commandeRepository.find();
@@ -47,42 +53,41 @@ export const retrieveCommande = async (req: Request, res: Response) :Promise<any
   }
 };
 
-// export const updateCommandeStatus: RequestHandler<{ id: string }> = async (
-//   req,
-//   res
-// ) => {
-//   const { id } = req.params;
-//   const { status } = req.body;
-//   const commandeRepository = AppDataSource.getRepository(Commande);
+export const updateCommandeStatus: RequestHandler<{ id: string }> = async (
+  req,
+  res
+): Promise<any> => {
+  const { id, status } = req.body;
+  const commandeRepository = AppDataSource.getRepository(Commande);
 
-//   try {
-//     const commande = await commandeRepository.findOne({ where: { id: +id } });
-//     if (!commande) {
-//       return res.status(404).json({
-//         message: "Commande introuvable",
-//       });
-//     }
+  try {
+    const commande = await commandeRepository.findOne({ where: { id: +id } });
+    if (!commande) {
+      return res.status(404).json({
+        message: "Commande introuvable",
+      });
+    }
 
-//     if (!Object.values(Status).includes(status)) {
-//       return res.status(400).json({
-//         message: "Statut invalide",
-//       });
-//     }
+    if (!Object.values(Status).includes(status)) {
+      return res.status(400).json({
+        message: "Statut invalide",
+      });
+    }
 
-//     commande.status = status;
-//     await commandeRepository.save(commande);
+    commande.status = status;
+    await commandeRepository.save(commande);
 
-//     return res.status(200).json({
-//       message: "Statut de la commande mis à jour",
-//       commande,
-//     });
-//   } catch (err: any) {
-//     console.error(err);
-//     return res.status(500).json({
-//       message: "Erreur lors de la mise à jour du statut",
-//     });
-//   }
-// };
+    return res.status(200).json({
+      message: "Statut de la commande mis à jour",
+      commande,
+    });
+  } catch (err: any) {
+    console.error(err);
+    return res.status(500).json({
+      message: "Erreur lors de la mise à jour du statut",
+    });
+  }
+};
 
 // export const deleteCommande: RequestHandler<{ id: string }> = async (
 //   req,
