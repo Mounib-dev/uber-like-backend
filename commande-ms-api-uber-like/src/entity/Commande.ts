@@ -14,6 +14,8 @@ export class Commande {
 
   @Column()
   clientId!: number;
+  @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" }) // ✅ Correction ici
+  date!: Date;
 
   @Column("json")
   plats!: {
@@ -32,11 +34,13 @@ export class Commande {
 
   constructor(
     clientId: number,
+    date: Date = new Date() ,
     plats: { id: number; nom: string; quantite: number; prix: number }[],
     status: Status = Status.EN_ATTENTE
   ) {
     this.clientId = clientId;
     this.plats = plats;
     this.status = status;
+    this.date= date
   }
 }
