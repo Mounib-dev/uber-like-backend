@@ -1,21 +1,19 @@
 import { Router } from "express";
 import {
   createCommande,
-  retrieveCommande
+  retrieveCommande,
+  updateCommandeStatus,
   //deleteCommande,
-
-  //updateCommande,
-} from '../services/Commande/CommandeService';
+} from "../services/Commande/CommandeService";
 import authorizeUser from "../middlewares/authorize";
-
 
 const router = Router();
 
-router.post("/create",authorizeUser, createCommande);
+router.post("/create", authorizeUser, createCommande);
 
 router.get("/list", authorizeUser, retrieveCommande);
 
-//router.put("/:id", updateCommande);
+router.patch("/update", authorizeUser, updateCommandeStatus);
 
 //router.delete("/:id",deleteCommande);
 
