@@ -77,3 +77,31 @@ export const userInfo: RequestHandler = async (
     });
   }
 };
+
+export async function getClientsByIds(
+  req: Request,
+  res: Response
+): Promise<any> {
+  try {
+    console.log("test");
+    const ids = (req.query.ids as string)?.split(",") || [];
+    const response = await axios.get(
+      `http://localhost:3010/api/v1/client/clients?ids=${ids}`,
+      {
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+
+    res.status(response.status).json({
+      ...response.data,
+    });
+  } catch (error: any) {
+    console.error("Erreur de login:", error.message);
+
+    if (error.response) {
+      res.status(error.response.status).json(error.response.data);
+    } else {
+      res.status(500).json({ message: "Erreur interne API Gateway" });
+    }
+  }
+}
