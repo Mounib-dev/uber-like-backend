@@ -3,7 +3,7 @@ import {
   createCommande,
   retrieveCommande,
   updateCommandeStatus,
-  //deleteCommande,
+  deleteCommande,
 } from "../services/Commande/CommandeService";
 import authorizeUser from "../middlewares/authorize";
 
@@ -15,6 +15,6 @@ router.get("/list", authorizeUser, retrieveCommande);
 
 router.patch("/update", authorizeUser, updateCommandeStatus);
 
-//router.delete("/:id",deleteCommande);
+router.delete("/:id",authorizeUser,deleteCommande);
 
 export default router;

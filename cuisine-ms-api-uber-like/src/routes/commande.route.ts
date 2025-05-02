@@ -3,7 +3,7 @@ import {
   saveCommande,
   retrieveCommande,
   updateCommandeStatus,
-  //deleteCommande,
+  deleteCommande,
 } from "../api/api.commande";
 
 const router = Router();
@@ -14,6 +14,6 @@ router.get("/list", retrieveCommande);
 
 router.patch("/:id", updateCommandeStatus);
 
-//router.delete("/:id",deleteCommande);
+router.delete("/:id",deleteCommande);
 
 export default router;
