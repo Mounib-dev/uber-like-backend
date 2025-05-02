@@ -1,11 +1,4 @@
 Backend – Uber-like Microservices
- Structure du projet
-.
-├── api-microservices-gateway-uber-like       # Gateway API (point d'entrée)
-├── client-ms-api-uber-like                   # Service client
-├── commande-ms-api-uber-like                 # Service de commandes
-├── cuisine-ms-api-uber-like                  # Service cuisine
-├── livraison-ms-api-uber-like                # Service livraison
 Chaque microservice fonctionne indépendamment avec sa propre base de données PostgreSQL.
 Prérequis
 Node.js 
