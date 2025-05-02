@@ -15,8 +15,14 @@ Git
  Installation et Configuration
 1. Cloner le projet
 git clone https://github.com/Mounib-dev/uber-like-backend.git
+
+
 cd <répertoire_du_projet>
+
+
 2. Installer les dépendances
+
+
 Installez les dépendances dans chaque service :
 
 cd api-microservices-gateway-uber-like
