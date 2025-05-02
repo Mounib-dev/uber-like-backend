@@ -154,3 +154,60 @@ export const updateCommandeStatus = async (
     }
   }
 };
+
+export const deleteCommande = async (
+  req: Request,
+  res: Response
+): Promise<any> => {
+  const { id } = req.params;
+
+  try {
+    // Suppression de la commande dans le service de commande
+    const response = await axios.delete(
+      `http://localhost:3020/api/v1/commande/${id}`,
+      {
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+
+    if (response.status === 204) {
+      try {
+        // Tentative de suppression dans les autres services (Client, Cuisine, Livraison)
+        
+        // Suppression dans le service Client
+        await axios.delete(
+          `http://localhost:3010/api/v1/commande/${id}`,
+          { headers: { "Content-Type": "application/json" } }
+        );
+
+        // Suppression dans le service Cuisine
+        await axios.delete(
+          `http://localhost:3030/api/v1/commande/${id}`,
+          { headers: { "Content-Type": "application/json" } }
+        );
+
+        // Suppression dans le service Livraison
+        await axios.delete(
+          `http://localhost:3040/api/v1/commande/${id}`,
+          { headers: { "Content-Type": "application/json" } }
+        );
+
+      } catch (err) {
+        console.error("Erreur lors de la suppression dans les autres services:", err);
+      }
+    }
+
+    return res.status(response.status).json(response.data);
+  } catch (error: any) {
+    console.error("Erreur lors de la suppression de la commande:", error.message);
+
+    if (error.response) {
+      return res.status(error.response.status).json(error.response.data);
+    } else {
+      return res.status(500).json({
+        message: "Erreur interne API Gateway",
+      });
+    }
+  }
+};
+

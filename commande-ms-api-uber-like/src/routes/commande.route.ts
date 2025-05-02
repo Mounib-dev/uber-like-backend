@@ -2,7 +2,7 @@ import { Router } from "express";
 import {
   createCommande,
   retrieveCommande,
-  //deleteCommande,
+  deleteCommande,
   updateCommandeStatus,
 } from "../api/api.commande";
 
@@ -14,6 +14,6 @@ router.get("/list", retrieveCommande);
 
 router.patch("/:id", updateCommandeStatus);
 
-//router.delete("/:id",deleteCommande);
+router.delete("/:id",deleteCommande);
 
 export default router;

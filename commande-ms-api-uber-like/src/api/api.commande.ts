@@ -89,24 +89,24 @@ export const updateCommandeStatus: RequestHandler<{ id: string }> = async (
   }
 };
 
-// export const deleteCommande: RequestHandler<{ id: string }> = async (
-//   req,
-//   res
-// ) => {
-//   const { id } = req.params;
-//   const commandeRepository = AppDataSource.getRepository(Commande);
-//   try {
-//     const result = await commandeRepository.delete(+id);
-//     if (result.affected === 0) {
-//       return res.status(404).json({
-//         message: "Commande introuvable",
-//       });
-//     }
-//     return res.status(204).send();
-//   } catch (err: any) {
-//     console.error(err);
-//     return res.status(500).json({
-//       message: "Erreur lors de la suppression de la commande",
-//     });
-//   }
-//};
+export const deleteCommande: RequestHandler<{ id: string }> = async (
+  req,
+  res
+):Promise<any> => {
+  const { id } = req.params;
+  const commandeRepository = AppDataSource.getRepository(Commande);
+  try {
+    const result = await commandeRepository.delete(+id);
+    if (result.affected === 0) {
+      return res.status(404).json({
+        message: "Commande introuvable",
+      });
+    }
+    return res.status(204).send();
+  } catch (err: any) {
+    console.error(err);
+    return res.status(500).json({
+      message: "Erreur lors de la suppression de la commande",
+    });
+  }
+};
