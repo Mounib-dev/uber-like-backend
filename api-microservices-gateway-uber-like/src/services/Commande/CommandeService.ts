@@ -73,10 +73,75 @@ export const retrieveCommande = async (
       }
     );
 
+    // Try other services before sending response
+
     return res.status(response.status).json(response.data);
   } catch (error: any) {
     console.error(
       "Erreur lors de la récupération des commandes:",
+      error.message
+    );
+
+    if (error.response) {
+      return res.status(error.response.status).json(error.response.data);
+    } else {
+      return res.status(500).json({
+        message: "Erreur interne API Gateway",
+      });
+    }
+  }
+};
+
+export const updateCommandeStatus = async (
+  req: Request,
+  res: Response
+): Promise<any> => {
+  try {
+    const response = await axios.patch(
+      `http://localhost:3020/api/v1/commande/${req.body.id}`,
+      req.body,
+      {
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+
+    if (response.status === 200) {
+      try {
+        // Update within Client Service
+        const responseFromClientService = await axios.patch(
+          `http://localhost:3010/api/v1/commande/${req.body.id}`,
+          req.body,
+          {
+            headers: { "Content-Type": "application/json" },
+          }
+        );
+
+        // Update within Cuisine Service
+        const responseFromCuisineService = await axios.patch(
+          `http://localhost:3030/api/v1/commande/${req.body.id}`,
+          req.body,
+          {
+            headers: { "Content-Type": "application/json" },
+          }
+        );
+
+        // Update within Livraison Service
+        const responseFromLivraisonService = await axios.patch(
+          `http://localhost:3040/api/v1/commande/${req.body.id}`,
+          req.body,
+          {
+            headers: { "Content-Type": "application/json" },
+          }
+        );
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    return res.status(response.status).json(response.data);
+  } catch (error: any) {
+    console.error(
+      "Erreur lors de la mis à du du statut de la commande:",
       error.message
     );
 

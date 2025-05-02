@@ -1,12 +1,10 @@
 import { Router } from "express";
 import {
   createCommande,
-  retrieveCommande
+  retrieveCommande,
   //deleteCommande,
- 
-  //updateCommande,
+  updateCommandeStatus,
 } from "../api/api.commande";
-
 
 const router = Router();
 
@@ -14,7 +12,7 @@ router.post("/create", createCommande);
 
 router.get("/list", retrieveCommande);
 
-//router.put("/:id", updateCommande);
+router.patch("/:id", updateCommandeStatus);
 
 //router.delete("/:id",deleteCommande);
 
