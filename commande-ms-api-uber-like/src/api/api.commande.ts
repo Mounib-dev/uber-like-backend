@@ -25,6 +25,7 @@ export const createCommande = async (
 
   try {
     await commandeRepository.save(newCommande);
+    console.log(newCommande);
     return res.status(201).json({
       message: "Commande créée avec succès",
       commande: newCommande,

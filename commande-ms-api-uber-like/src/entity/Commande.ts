@@ -4,6 +4,7 @@ export enum Status {
   EN_ATTENTE = "en attente",
   EN_PREPARATION = "en préparation",
   PRET = "prêt",
+  EN_LIVRAISON = "en cours de livraison",
   LIVRE = "livré",
 }
 
@@ -34,13 +35,13 @@ export class Commande {
 
   constructor(
     clientId: number,
-    date: Date = new Date() ,
+    date: Date = new Date(),
     plats: { id: number; nom: string; quantite: number; prix: number }[],
     status: Status = Status.EN_ATTENTE
   ) {
     this.clientId = clientId;
     this.plats = plats;
     this.status = status;
-    this.date= date
+    this.date = date;
   }
 }

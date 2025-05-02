@@ -4,6 +4,7 @@ export enum Status {
   EN_ATTENTE = "en attente",
   EN_PREPARATION = "en préparation",
   PRET = "prêt",
+  EN_LIVRAISON = "en cours de livraison",
   LIVRE = "livré",
 }
 

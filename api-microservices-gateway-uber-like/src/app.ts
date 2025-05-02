@@ -16,8 +16,6 @@ import commandeServiceRoutes from "./routes/CommandeService.route";
 import livraisonServiceRoutes from "./routes/LivraisonService.route";
 import cuisineGatewayRoutes from "./routes/CuisineService.route";
 
-
-
 const app = express();
 
 app.use(morgan("dev"));
@@ -50,11 +48,77 @@ app.set("io", io);
 //     `[server]:🗄️  Gateway Server is running at http://localhost:${port}`
 //   );
 // });
-
+const connectedUsers = new Map();
+const connectedDeliveryPersons = new Map();
+const connectedChefs = new Map();
 io.on("connection", (socket) => {
   console.log("🔌 New client connected");
+
+  // Register user with a specific socket id
+  socket.on("register", (userId) => {
+    connectedUsers.set(userId, socket.id);
+    console.log(`✅ Registered user ${userId} with socket id ${socket.id}`);
+  });
+
+  socket.on("register delivery person", (deliveryPersonId) => {
+    connectedDeliveryPersons.set(deliveryPersonId, socket.id);
+    console.log(
+      `✅ Registered user (delivery person) ${deliveryPersonId} with socket id ${socket.id}`
+    );
+  });
+
+  socket.on("register chef", (chefId) => {
+    connectedChefs.set(chefId, socket.id);
+    console.log(
+      `✅ Registered user (chef) ${chefId} with socket id ${socket.id}`
+    );
+  });
+
+  socket.on("accept order", ({ commandeId, clientId }) => {
+    console.log(clientId);
+    console.log(commandeId);
+    console.log(connectedUsers);
+    const clientSocketId = connectedUsers.get(clientId);
+    console.log(clientSocketId);
+    if (clientSocketId) {
+      io.to(clientSocketId).emit("inform client about preparation", {
+        commandeId,
+      });
+      for (const [
+        deliveryPersonId,
+        socketId,
+      ] of connectedDeliveryPersons.entries()) {
+        io.to(socketId).emit("inform livreur about new accepted commande", {
+          commandeId,
+        });
+      }
+    } else {
+      console.log(`⚠️ Client ${clientId} not connected`);
+    }
+  });
+
+  socket.on(
+    "inform restaurant about new commande",
+    ({ commandeId, clientId, plats }) => {
+      console.log(clientId);
+      for (const [chefId, socketId] of connectedChefs.entries()) {
+        io.to(socketId).emit("inform restaurant", {
+          commandeId,
+          clientId,
+          plats,
+        });
+      }
+    }
+  );
+
   socket.on("disconnect", () => {
-    console.log("❌ User disconnected");
+    for (const [userId, id] of connectedUsers.entries()) {
+      if (id === socket.id) {
+        connectedUsers.delete(userId);
+        console.log(`❌ User ${userId} disconnected`);
+        break;
+      }
+    }
   });
 });
 
