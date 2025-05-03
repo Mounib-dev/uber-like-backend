@@ -7,11 +7,7 @@ Chaque microservice fonctionne indépendamment avec sa propre base de données P
 Prérequis :
 
 
-Node.js 
-
-PostgreSQL (et PgAdmin ou équivalent)
-
-Git
+Node.js  / PostgreSQL (et PgAdmin ou équivalent) /  Git
 
 Installation et Configuration
 
@@ -57,43 +53,66 @@ Chaque dossier de service nécessite un fichier .env. Voici les modèles à suiv
  Gateway – api-microservices-gateway-uber-like/.env
 
 PORT=5000
+
 JWT_SECRET=your_jwt_secret
 
 ----- Client Service – client-ms-api-uber-like/.env-----
+
 DATABASE_NAME='uber-like-client'
+
 DATABASE_HOST='localhost'
+
 DATABASE_PORT=5432
+
 DATABASE_USERNAME='postgre'
+
 DATABASE_PASSWORD=your_password
+
 JWT_SECRET=your_jwt_secret
 
 
 ----- Commande Service – commande-ms-api-uber-like/.env -----
+
 DATABASE_NAME='uber-like-commande'
+
 DATABASE_HOST='localhost'
+
 DATABASE_PORT=5432
+
 DATABASE_USERNAME='postgre'
+
 DATABASE_PASSWORD=your_password
 
 
 ---- Cuisine Service – cuisine-ms-api-uber-like/.env----
+
 DATABASE_NAME='uber-like-cuisine'
+
 DATABASE_HOST='localhost'
+
 DATABASE_PORT=5432
+
 DATABASE_USERNAME='postgre'
+
 DATABASE_PASSWORD=your_password
 
 
 ----- Livraison Service – livraison-ms-api-uber-like/.env -----
+
 DATABASE_NAME='uber-like-livraison'
+
 DATABASE_HOST='localhost'
+
 DATABASE_PORT=5432
+
 DATABASE_USERNAME='postgre'
+
 DATABASE_PASSWORD=your_password
 
 *** Remarque : JWT_SECRET est requis uniquement pour les services qui gèrent l’authentification (gateway & client).
 
 4. Lancer les services
+
 Dans chaque dossier :
 
 npm run dev 
@@ -106,6 +125,7 @@ Répétez dans des terminaux séparés pour lancer tous les services.
 Utilisez Postman ou le front-end  pour faire des requêtes via la gateway.
 
 Exemple de route : "http://localhost:3010/api/v1/user/register"
+
 tout est spécifié dans le dossier service de la gateway
 
 
