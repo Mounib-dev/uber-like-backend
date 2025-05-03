@@ -50,11 +50,12 @@ Les bases de données doivent être déjà créées. Le fichier .env de chaque s
 
 Chaque dossier de service nécessite un fichier .env. Voici les modèles à suivre (remplir avec vos propres données) :
 
- Gateway – api-microservices-gateway-uber-like/.env
+------ Gateway – api-microservices-gateway-uber-like/.env ---------
 
 PORT=5000
 
 JWT_SECRET=your_jwt_secret
+
 
 ----- Client Service – client-ms-api-uber-like/.env-----
 
@@ -109,7 +110,9 @@ DATABASE_USERNAME='postgre'
 
 DATABASE_PASSWORD=your_password
 
+
 *** Remarque : JWT_SECRET est requis uniquement pour les services qui gèrent l’authentification (gateway & client).
+
 
 4. Lancer les services
 
