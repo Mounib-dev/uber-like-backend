@@ -74,7 +74,7 @@ io.on("connection", (socket) => {
     );
   });
 
-  socket.on("accept order", ({ commandeId, clientId }) => {
+  socket.on("accept order", ({ commandeId, clientId, plats }) => {
     console.log(clientId);
     console.log(commandeId);
     console.log(connectedUsers);
@@ -89,6 +89,29 @@ io.on("connection", (socket) => {
         socketId,
       ] of connectedDeliveryPersons.entries()) {
         io.to(socketId).emit("inform livreur about new accepted commande", {
+          commandeId,
+          clientId,
+          plats,
+        });
+      }
+    } else {
+      console.log(`⚠️ Client ${clientId} not connected`);
+    }
+  });
+
+  socket.on("order is ready", ({ commandeId, clientId, plats }) => {
+    console.log(clientId);
+    const clientSocketId = connectedUsers.get(clientId);
+    console.log(clientSocketId);
+    if (clientSocketId) {
+      io.to(clientSocketId).emit("inform client order is ready", {
+        commandeId,
+      });
+      for (const [
+        deliveryPersonId,
+        socketId,
+      ] of connectedDeliveryPersons.entries()) {
+        io.to(socketId).emit("inform livreur order is ready", {
           commandeId,
         });
       }
@@ -110,6 +133,42 @@ io.on("connection", (socket) => {
       }
     }
   );
+
+  socket.on("start delivery", ({ commandeId, clientId, plats }) => {
+    console.log(clientId);
+    const clientSocketId = connectedUsers.get(clientId);
+    console.log(clientSocketId);
+    if (clientSocketId) {
+      io.to(clientSocketId).emit("inform client delivery started", {
+        commandeId,
+      });
+      for (const [chefId, socketId] of connectedChefs.entries()) {
+        io.to(socketId).emit("inform restaurant delivery started", {
+          commandeId,
+        });
+      }
+    } else {
+      console.log(`⚠️ Client ${clientId} not connected`);
+    }
+  });
+
+  socket.on("order delivered", ({ commandeId, clientId, plats }) => {
+    console.log(clientId);
+    const clientSocketId = connectedUsers.get(clientId);
+    console.log(clientSocketId);
+    if (clientSocketId) {
+      io.to(clientSocketId).emit("inform client order delivered", {
+        commandeId,
+      });
+      for (const [chefId, socketId] of connectedChefs.entries()) {
+        io.to(socketId).emit("inform restaurant order delivered", {
+          commandeId,
+        });
+      }
+    } else {
+      console.log(`⚠️ Client ${clientId} not connected`);
+    }
+  });
 
   socket.on("disconnect", () => {
     for (const [userId, id] of connectedUsers.entries()) {
