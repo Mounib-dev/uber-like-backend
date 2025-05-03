@@ -61,13 +61,18 @@ JWT_SECRET=your_jwt_secret
 
 DATABASE_NAME='uber-like-client'
 
+
 DATABASE_HOST='localhost'
+
 
 DATABASE_PORT=5432
 
+
 DATABASE_USERNAME='postgre'
 
+
 DATABASE_PASSWORD=your_password
+
 
 JWT_SECRET=your_jwt_secret
 
@@ -76,11 +81,15 @@ JWT_SECRET=your_jwt_secret
 
 DATABASE_NAME='uber-like-commande'
 
+
 DATABASE_HOST='localhost'
+
 
 DATABASE_PORT=5432
 
+
 DATABASE_USERNAME='postgre'
+
 
 DATABASE_PASSWORD=your_password
 
@@ -89,11 +98,15 @@ DATABASE_PASSWORD=your_password
 
 DATABASE_NAME='uber-like-cuisine'
 
+
 DATABASE_HOST='localhost'
+
 
 DATABASE_PORT=5432
 
+
 DATABASE_USERNAME='postgre'
+
 
 DATABASE_PASSWORD=your_password
 
@@ -102,11 +115,15 @@ DATABASE_PASSWORD=your_password
 
 DATABASE_NAME='uber-like-livraison'
 
+
 DATABASE_HOST='localhost'
+
 
 DATABASE_PORT=5432
 
+
 DATABASE_USERNAME='postgre'
+
 
 DATABASE_PASSWORD=your_password
 
