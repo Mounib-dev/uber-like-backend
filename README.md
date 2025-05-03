@@ -8,12 +8,15 @@ Prérequis :
 
 
 Node.js 
+
 PostgreSQL (et PgAdmin ou équivalent)
+
 Git
 
+Installation et Configuration
 
- Installation et Configuration
 1. Cloner le projet
+
 git clone https://github.com/Mounib-dev/uber-like-backend.git
 
 
