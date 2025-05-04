@@ -4,7 +4,7 @@ Backend – Uber-like Microservices
 
 Après avoir suivi les étapes d'installation ci-dessous, reférez-vous au paragraphe suivant :
 
-Référez-vous au repository frontend pour lancer l'application, vous serez guidé pour inscrire rapidement, créez 3 comptes (ETAPES 6 READ.ME FRONTEND), ils seront par défaut tous avec le rôle "client", vous devrez modifier à la main les rôles des deux autres utilisaeturs pour les mettre respectivement à "livreur" et "chef", ainsi vous connecter sur une fenêtre du navigateur de vtore choix, une deuxième en navigation privée du même navigateur et une troisième avec un second navigateur de votre choix également pour tester les mises à jour et alertes en temps réellement lorsque la commande change d'état.
+Référez-vous au repository frontend pour lancer l'application, vous serez guidé pour vous inscrire rapidement, créez 3 comptes (ETAPES 6 READ.ME FRONTEND), ils seront par défaut tous avec le rôle "client", vous devrez modifier à la main les rôles des deux autres utilisateurs pour les mettre respectivement à "livreur" et "chef", ainsi vous connecter sur une fenêtre du navigateur de vtore choix, une deuxième en navigation privée du même navigateur et une troisième avec un second navigateur de votre choix également pour tester les mises à jour et alertes en temps réellement lorsque la commande change d'état.
 
 \***\*ETAPES D'INSTALLATION\*\*\***
 
